@@ -1,6 +1,5 @@
 body {
     background-color: #1da1f2;
-    color: #fff;
     font-family: Arial, sans-serif;
 }
 
@@ -18,19 +17,23 @@ h1 {
     font-size: 36px;
     margin-top: 0;
     margin-bottom: 30px;
+    color: #000;
 }
 
 label {
     font-size: 20px;
     margin-right: 10px;
+    color: #000;
 }
 
-input {
-    padding: 10px;
+input[type="text"] {
+    padding: 15px;
     font-size: 20px;
     border-radius: 5px;
     border: none;
     margin-right: 10px;
+    background-color: #f7f7f7;
+    color: #1da1f2;
 }
 
 input:focus {
@@ -38,18 +41,18 @@ input:focus {
 }
 
 button {
-    padding: 10px;
+    padding: 15px;
     font-size: 20px;
     border-radius: 5px;
     border: none;
-    background-color: #fff;
-    color: #1da1f2;
+    background-color: #1da1f2;
+    color: #fff;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
 button:hover {
-    background-color: #e8e8e8;
+    background-color: #0d8ecf;
 }
 
 #urls, #preserved-urls {
@@ -83,6 +86,7 @@ a:hover {
 #preserved-urls h2 {
     margin-top: 0;
     margin-bottom: 30px;
+    color: #000;
 }
 
 #preserved-urls ul {
@@ -98,7 +102,7 @@ a:hover {
 }
 
 #preserved-urls a {
-    color: #fff;
+    color: #000;
 }
 
 #preserved-urls a:hover {
