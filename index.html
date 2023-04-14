@@ -47,19 +47,22 @@
             };
 
             let urlsHtml = "<h2>URLs Principais:</h2>";
+            urlsHtml += "<ul>";
             urls.forEach(url => {
-                urlsHtml += `<p>${url}</p>`;
+                urlsHtml += `<li><a href="${url}" target="_blank">${url}</a></li>`;
             });
-
+            urlsHtml += "</ul>";
             document.getElementById("urls").innerHTML = urlsHtml;
 
             let preservedUrlsHtml = "";
             for (const [site, baseUrl] of Object.entries(sites)) {
-                preservedUrlsHtml += `<h3>${site}:</h3>`;
+                preservedUrlsHtml += `<h2>URLs preservadas em ${site}:</h2>`;
+                preservedUrlsHtml += "<ul>";
                 urls.forEach(url => {
                     preservedUrl = baseUrl + url;
-                    preservedUrlsHtml += `<p>${preservedUrl}</p>`;
+                    preservedUrlsHtml += `<li><a href="${preservedUrl}" target="_blank">${preservedUrl}</a></li>`;
                 });
+                preservedUrlsHtml += "</ul>";
             }
 
             document.getElementById("web-archive").innerHTML = preservedUrlsHtml;
