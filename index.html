@@ -1,33 +1,32 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Twitter Profile URLs</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
+    <main class="container">
         <h1>Twitter Profile URLs</h1>
+        <form id="user-input">
+            <label for="twitter-url">Insira a URL do perfil do Twitter ou o nome de usuário:</label>
+            <div>
+                <input type="text" id="twitter-url" name="twitter-url" required>
+                <button type="button" onclick="generateUrls()">Gerar URLs</button>
+            </div>
+        </form>
 
-<div id="user-input">
-    <div>
-        <label for="twitter-url">Insira a URL do perfil do Twitter ou o nome de usuário:</label>
-    </div>
-    <div>
-        <input type="text" id="twitter-url" name="twitter-url">
-        <button onclick="generateUrls()">Gerar URLs</button>
-    </div>
-</div>
+        <section id="urls"></section>
 
-
-        <div id="urls"></div>
-
-        <div id="preserved-urls">
+        <section id="preserved-urls">
             <h2>URLs preservadas</h2>
-            <div id="web-archive"></div>
-            <div id="archive-today"></div>
-        </div>
-    </div>
+            <ul>
+                <li><a href="#" target="_blank"></a></li>
+                <li><a href="#" target="_blank"></a></li>
+            </ul>
+        </section>
+    </main>
 
     <script src="app.js"></script>
 </body>
