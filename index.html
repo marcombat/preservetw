@@ -3,25 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>Twitter Profile URLs</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <label for="twitter-url">Insira a URL do perfil do Twitter ou o nome de usuário: </label>
-    <input type="text" id="twitter-url" name="twitter-url">
-    <button onclick="generateUrls()">Gerar URLs</button>
+    <div class="container">
+        <h1>Twitter Profile URLs</h1>
 
-    <div id="urls"></div>
-    
-    <h2>Extensão do Google Chrome para realizar os prints</h2>
-<p><a href="https://chrome.google.com/webstore/detail/gofullpage-full-page-scre/fdpohaocaechififmbbbbbknoalclacl" target="_blank">https://chrome.google.com/webstore/detail/gofullpage-full-page-scre/fdpohaocaechififmbbbbbknoalclacl</a></p>
+        <div id="user-input">
+            <label for="twitter-url">Insira a URL do perfil do Twitter ou o nome de usuário:</label>
+            <input type="text" id="twitter-url" name="twitter-url">
+            <button onclick="generateUrls()">Gerar URLs</button>
+        </div>
 
-<h2>Extensão do Google Chrome para abrir múltiplas URLs</h2>
-<p><a href="https://chrome.google.com/webstore/detail/open-multiple-urls/oifijhaokejakekmnjmphonojcfkpbbh" target="_blank">https://chrome.google.com/webstore/detail/open-multiple-urls/oifijhaokejakekmnjmphonojcfkpbbh</a></p>
+        <div id="urls"></div>
 
-
-    <div id="preserved-urls">
-        <h2>URLs preservadas</h2>
-        <div id="web-archive"></div>
-        <div id="archive-today"></div>
+        <div id="preserved-urls">
+            <h2>URLs preservadas</h2>
+            <div id="web-archive"></div>
+            <div id="archive-today"></div>
+        </div>
     </div>
 
     <script src="app.js"></script>
