@@ -1,63 +1,59 @@
-async function generateUrls() {
-    const inputField = document.getElementById("input-field");
-    const usernameOrUrl = inputField.value;
+function generateUrls() {
+  const inputField = document.getElementById("input-field");
+  const inputStr = inputField.value.trim();
 
-    // verifica se a entrada é uma URL ou um nome de usuário
-    const parsedUrl = new URL(usernameOrUrl);
-    let twitterProfileLink, username;
-    if (parsedUrl.hostname === "twitter.com") {
-        // a entrada é uma URL completa
-        twitterProfileLink = usernameOrUrl;
-        username = parsedUrl.pathname.split("/")[1];
-    } else {
-        // a entrada é um nome de usuário
-        username = usernameOrUrl;
-        twitterProfileLink = `https://twitter.com/${username}`;
-    }
+  // verifica se a entrada é uma URL ou um nome de usuário
+  let username;
+  let twitterProfileLink;
+  try {
+    const parsedUrl = new URL(inputStr);
+    twitterProfileLink = parsedUrl.toString();
+    username = parsedUrl.pathname.split("/")[1];
+  } catch (error) {
+    twitterProfileLink = `https://twitter.com/${inputStr}`;
+    username = inputStr;
+  }
 
-    // gera as URLs principais com base no nome de usuário
-    const profileUrl = `https://twitter.com/${username}`;
-    const withRepliesUrl = `https://twitter.com/${username}/with_replies`;
-    const mediaUrl = `https://twitter.com/${username}/media`;
-    const likesUrl = `https://twitter.com/${username}/likes`;
-    const followingUrl = `https://twitter.com/${username}/following`;
-    const followersUrl = `https://twitter.com/${username}/followers`;
+  // gera as URLs principais com base no nome de usuário
+  const profileUrl = `https://twitter.com/${username}`;
+  const withRepliesUrl = `https://twitter.com/${username}/with_replies`;
+  const mediaUrl = `https://twitter.com/${username}/media`;
+  const likesUrl = `https://twitter.com/${username}/likes`;
+  const followingUrl = `https://twitter.com/${username}/following`;
+  const followersUrl = `https://twitter.com/${username}/followers`;
 
-    // lista de URLs a serem preservadas
-    const urls = [profileUrl, withRepliesUrl, mediaUrl, likesUrl, followingUrl, followersUrl];
+  // cria a lista de URLs a serem exibidas
+  const urlsList = document.getElementById("urls-list");
+  urlsList.innerHTML = ""; // limpa a lista
+  const urls = [
+    profileUrl,
+    withRepliesUrl,
+    mediaUrl,
+    likesUrl,
+    followingUrl,
+    followersUrl
+  ];
+  urls.forEach(url => {
+    const listItem = document.createElement("li");
+    listItem.textContent = url;
+    urlsList.appendChild(listItem);
+  });
 
-    // lista de sites de preservação
-    const sites = {
-        "Web Archive": "https://web.archive.org/save/",
-        "Archive.today": "https://archive.today/?run=1&url=",
-        "Archive.is": "http://archive.is/?url=",
-        "Archive.fo": "https://archive.fo/?run=1&url=",
-        "Perma.cc": "https://perma.cc/api/v1/archives/?url=",
-        "WebCite": "http://www.webcitation.org/query.php?url="
-    };
+  // exibe as URLs dos sites de preservação
+  const sites = {
+    "Web Archive": "https://web.archive.org/save/",
+    "Archive.today": "https://archive.today/?run=1&url=",
+    "Archive.is": "http://archive.is/?url=",
+    "Archive.fo": "https://archive.fo/?run=1&url=",
+    "Perma.cc": "https://perma.cc/api/v1/archives/?url=",
+    "WebCite": "http://www.webcitation.org/query.php?url="
+  };
 
-    // limpa a lista de URLs existente
-    const urlsList = document.getElementById("urls-list");
-    urlsList.innerHTML = "";
+  Object.entries(sites).forEach(([site, base_url]) => {
+    const siteHeader = document.createElement("h3");
+    siteHeader.textContent = `${site}:`;
+    urlsList.appendChild(siteHeader);
 
-    // adiciona as URLs geradas à lista
-    for (const url of urls) {
-        const li = document.createElement("li");
-        li.innerText = url;
-        urlsList.appendChild(li);
-    }
-
-    // adiciona as URLs de preservação à lista
-    for (const [site, baseUrl] of Object.entries(sites)) {
-        const li = document.createElement("li");
-        li.innerText = `${site}:`;
-        urlsList.appendChild(li);
-        for (const url of urls) {
-            const preservedUrl = `${baseUrl}${url}`;
-            const li = document.createElement("li");
-            li.innerText = preservedUrl;
-            urlsList.appendChild(li);
-        }
-        urlsList.appendChild(document.createElement("br"));
-    }
-}
+    urls.forEach(url => {
+      const preservedUrl = `${base_url}${url}`;
+      const listItem = document.createElement("li");
