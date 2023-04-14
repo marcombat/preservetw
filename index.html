@@ -1,18 +1,69 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>Twitter URL Generator</title>
-    <script src="index.js"></script>
+	<title>Twitter Profile URLs</title>
 </head>
 <body>
-    <h1>Twitter URL Generator</h1>
-    <p>Enter a Twitter username or URL:</p>
-    <input type="text" id="input-field">
-    <button onclick="generateUrls()">Generate URLs</button>
-    <br>
-    <br>
-    <h2>Generated URLs:</h2>
-    <ul id="urls-list"></ul>
+	<label for="twitter-url">Insira a URL do perfil do Twitter ou o nome de usuário: </label>
+	<input type="text" id="twitter-url" name="twitter-url">
+	<button onclick="generateUrls()">Gerar URLs</button>
+
+	<div id="urls"></div>
+
+	<div id="preserved-urls">
+		<h2>URLs preservadas</h2>
+		<div id="web-archive"></div>
+		<div id="archive-today"></div>
+	</div>
+
+	<script>
+		function generateUrls() {
+			const input = document.getElementById("twitter-url").value;
+			const parsedUrl = new URL(input);
+			let username, twitterProfileLink;
+
+			if (parsedUrl.protocol && parsedUrl.hostname && parsedUrl.pathname.startsWith("/")) {
+				// a entrada é uma URL completa
+				twitterProfileLink = input;
+				username = parsedUrl.pathname.split("/")[1];
+			} else {
+				// a entrada é um nome de usuário
+				username = input;
+				twitterProfileLink = `https://twitter.com/${username}`;
+			}
+
+			const profileUrl = `https://twitter.com/${username}`;
+			const withRepliesUrl = `https://twitter.com/${username}/with_replies`;
+			const mediaUrl = `https://twitter.com/${username}/media`;
+			const likesUrl = `https://twitter.com/${username}/likes`;
+			const followingUrl = `https://twitter.com/${username}/following`;
+			const followersUrl = `https://twitter.com/${username}/followers`;
+
+			const urls = [profileUrl, withRepliesUrl, mediaUrl, likesUrl, followingUrl, followersUrl];
+			const sites = {
+			    "Web Archive": "https://web.archive.org/save/",
+			    "Archive.today": "https://archive.today/?run=1&url="
+			};
+
+			let urlsHtml = "<h2>URLs Principais:</h2>";
+			urls.forEach(url => {
+				urlsHtml += `<p>${url}</p>`;
+			});
+
+			document.getElementById("urls").innerHTML = urlsHtml;
+
+			let preservedUrlsHtml = "";
+			for (const [site, baseUrl] of Object.entries(sites)) {
+				preservedUrlsHtml += `<h3>${site}:</h3>`;
+				urls.forEach(url => {
+					preservedUrl = baseUrl + url;
+					preservedUrlsHtml += `<p>${preservedUrl}</p>`;
+				});
+			}
+
+			document.getElementById("web-archive").innerHTML = preservedUrlsHtml;
+
+		}
+	</script>
 </body>
 </html>
