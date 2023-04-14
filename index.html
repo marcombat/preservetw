@@ -1,27 +1,114 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Twitter Profile URLs</title>
+    <style>
+        body {
+            background-color: #F5F8FA;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+            color: #1C1E21;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .input-container {
+            display: flex;
+        }
+
+        input[type="text"] {
+            flex-grow: 1;
+            padding: 10px;
+            margin-right: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #FFFFFF;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #1DA1F2;
+            color: #FFFFFF;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        button:hover {
+            background-color: #0F86D0;
+        }
+
+        h2 {
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        a {
+            color: #1DA1F2;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-    <label for="twitter-url">Insira a URL do perfil do Twitter ou o nome de usuário: </label>
-    <input type="text" id="twitter-url" name="twitter-url">
-    <button onclick="generateUrls()">Gerar URLs</button>
+    <div class="container">
+        <h1>Twitter Profile URLs</h1>
+        
+        <div class="form-container">
+            <form>
+                <label for="twitter-url">Insira a URL do perfil do Twitter ou o nome de usuário:</label>
+                <div class="input-container">
+                    <input type="text" id="twitter-url" name="twitter-url">
+                    <button onclick="generateUrls()">Gerar URLs</button>
+                </div>
+            </form>
+        </div>
 
-    <div id="urls"></div>
-    
-    <h2>Extensão do Google Chrome para realizar os prints</h2>
-<p><a href="https://chrome.google.com/webstore/detail/gofullpage-full-page-scre/fdpohaocaechififmbbbbbknoalclacl" target="_blank">https://chrome.google.com/webstore/detail/gofullpage-full-page-scre/fdpohaocaechififmbbbbbknoalclacl</a></p>
+        <div id="urls"></div>
 
-<h2>Extensão do Google Chrome para abrir múltiplas URLs</h2>
-<p><a href="https://chrome.google.com/webstore/detail/open-multiple-urls/oifijhaokejakekmnjmphonojcfkpbbh" target="_blank">https://chrome.google.com/webstore/detail/open-multiple-urls/oifijhaokejakekmnjmphonojcfkpbbh</a></p>
-
-
-    <div id="preserved-urls">
-        <h2>URLs preservadas</h2>
-        <div id="web-archive"></div>
-        <div id="archive-today"></div>
+        <div id="preserved-urls">
+            <h2>URLs preservadas</h2>
+            <div id="web-archive"></div>
+            <div id="archive-today"></div>
+        </div>
     </div>
 
     <script src="app.js"></script>
