@@ -1,7 +1,17 @@
 function generateUrls() {
     const input = document.getElementById("twitter-url").value;
-    const parsedUrl = new URL(input);
-    const username = parsedUrl.pathname.startsWith("/") ? parsedUrl.pathname.split("/")[1] : input;
+    let username, twitterProfileLink;
+
+    if (input.startsWith("https://twitter.com/")) {
+        // entrada é uma URL completa
+        twitterProfileLink = input;
+        username = input.split("/")[3];
+    } else {
+        // entrada é um nome de usuário
+        username = input;
+        twitterProfileLink = `https://twitter.com/${username}`;
+    }
+
     const profileUrl = `https://twitter.com/${username}`;
     const withRepliesUrl = `https://twitter.com/${username}/with_replies`;
     const mediaUrl = `https://twitter.com/${username}/media`;
