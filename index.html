@@ -53,10 +53,18 @@
             });
             urlsHtml += "</ul>";
             document.getElementById("urls").innerHTML = urlsHtml;
+            
+             <h2>Extensão do Google Chrome para realizar os prints</h2>
+             <p><a href="https://chrome.google.com/webstore/detail/gofullpage-full-page-scre/fdpohaocaechififmbbbbbknoalclacl" target="_blank">https://chrome.google.com/webstore/detail/gofullpage-full-page-scre/fdpohaocaechififmbbbbbknoalclacl</a></p>
+
+              <h2>Extensão do Google Chrome para abrir múltiplas URLs</h2>
+             <p><a href="https://chrome.google.com/webstore/detail/open-multiple-urls/oifijhaokejakekmnjmphonojcfkpbbh" target="_blank">https://chrome.google.com/webstore/detail/open-multiple-urls/oifijhaokejakekmnjmphonojcfkpbbh</a></p>
+
+            
 
             let preservedUrlsHtml = "";
             for (const [site, baseUrl] of Object.entries(sites)) {
-                preservedUrlsHtml += `<h2>URLs preservadas em ${site}:</h2>`;
+                preservedUrlsHtml += `<h2> ${site}:</h2>`;
                 preservedUrlsHtml += "<ul>";
                 urls.forEach(url => {
                     preservedUrl = baseUrl + url;
