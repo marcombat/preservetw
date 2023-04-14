@@ -1,17 +1,18 @@
-function generateUrls() {
+async function generateUrls() {
+  // obtém a entrada do usuário
   const inputField = document.getElementById("input-field");
   const inputStr = inputField.value.trim();
 
   // verifica se a entrada é uma URL ou um nome de usuário
-  let username;
-  let twitterProfileLink;
+  let username = "";
+  let twitterProfileLink = "";
   try {
-    const parsedUrl = new URL(inputStr);
-    twitterProfileLink = parsedUrl.toString();
-    username = parsedUrl.pathname.split("/")[1];
-  } catch (error) {
-    twitterProfileLink = `https://twitter.com/${inputStr}`;
+    const url = new URL(inputStr);
+    username = url.pathname.split("/")[1];
+    twitterProfileLink = inputStr;
+  } catch {
     username = inputStr;
+    twitterProfileLink = `https://twitter.com/${username}`;
   }
 
   // gera as URLs principais com base no nome de usuário
@@ -22,38 +23,35 @@ function generateUrls() {
   const followingUrl = `https://twitter.com/${username}/following`;
   const followersUrl = `https://twitter.com/${username}/followers`;
 
-  // cria a lista de URLs a serem exibidas
+  // imprime as URLs principais geradas
   const urlsList = document.getElementById("urls-list");
-  urlsList.innerHTML = ""; // limpa a lista
-  const urls = [
-    profileUrl,
-    withRepliesUrl,
-    mediaUrl,
-    likesUrl,
-    followingUrl,
-    followersUrl
-  ];
+  urlsList.innerHTML = "";
+  const urls = [profileUrl, withRepliesUrl, mediaUrl, likesUrl, followingUrl, followersUrl];
   urls.forEach(url => {
     const listItem = document.createElement("li");
-    listItem.textContent = url;
+    listItem.innerText = url;
     urlsList.appendChild(listItem);
   });
 
-  // exibe as URLs dos sites de preservação
+  // lista de sites de preservação
   const sites = {
     "Web Archive": "https://web.archive.org/save/",
-    "Archive.today": "https://archive.today/?run=1&url=",
-    "Archive.is": "http://archive.is/?url=",
-    "Archive.fo": "https://archive.fo/?run=1&url=",
-    "Perma.cc": "https://perma.cc/api/v1/archives/?url=",
-    "WebCite": "http://www.webcitation.org/query.php?url="
+    "Archive.today": "https://archive.today/?run=1&url="
   };
 
-  Object.entries(sites).forEach(([site, base_url]) => {
-    const siteHeader = document.createElement("h3");
-    siteHeader.textContent = `${site}:`;
-    urlsList.appendChild(siteHeader);
-
+  // imprime as URLs de preservação para cada site
+  for (const [site, baseUrl] of Object.entries(sites)) {
+    const siteListItem = document.createElement("li");
+    siteListItem.innerText = site;
+    urlsList.appendChild(siteListItem);
     urls.forEach(url => {
-      const preservedUrl = `${base_url}${url}`;
-      const listItem = document.createElement("li");
+      const preservedUrl = `${baseUrl}${url}`;
+      const preservedUrlListItem = document.createElement("li");
+      preservedUrlListItem.innerText = preservedUrl;
+      urlsList.appendChild(preservedUrlListItem);
+    });
+  }
+
+  // separa as URLs de cada site com uma quebra de linha
+  urlsList.appendChild(document.createElement("br"));
+}
